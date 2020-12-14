@@ -122,7 +122,17 @@ public class AuthUserController {
         Map<String, Object> map = new HashMap<>(4);
         if (oldPassword == null || password1 == null || password2 == null) {
             map.put("status", -1);
+            map.put("error", "密码不能为空");
+            return map;
+        }
+        if (!password1.equals(password2)) {
+            map.put("status", -1);
             map.put("error", "新密码前后不一致");
+            return map;
+        }
+        if (oldPassword.equals(password1)) {
+            map.put("status", -1);
+            map.put("error", "新密码不能跟旧密码相同");
             return map;
         }
 

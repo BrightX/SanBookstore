@@ -153,6 +153,11 @@ let rePasswordSubmit = function (form) {
         });
         return false;
     }
+    if (oldPassword === password1) {
+        layer.msg('新密码不能跟旧密码相同', function () {
+        });
+        return false;
+    }
     $.ajax({
         url: form.action,
         type: "POST",
