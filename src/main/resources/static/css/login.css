@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+}
+
+body {
+    /*background: url('../img/findUser-bg.png') no-repeat;*/
+    background: url('../img/bg01.jpg') no-repeat;
+}
+
+.login {
+    width: 400px;
+    height: max-content;
+    background-color: snow;
+    margin: 125px auto 0;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px black;
+    transition: box-shadow 0.5s;
+}
+
+.login:hover {
+    box-shadow: 0 0 30px black;
+    transition: box-shadow 0.5s;
+}
+
+#login-form {
+    margin-top: 35px;
+}
