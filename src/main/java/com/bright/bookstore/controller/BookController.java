@@ -34,19 +34,6 @@ public class BookController {
         return "book/detail";
     }
 
-    @PostMapping("/upload")
-    public String uploadTest(MultipartFile file) {
-        // 获取文件名
-        String originalFilename = file.getOriginalFilename();
-        try {
-            // 保存文件
-            file.transferTo(new File("" + originalFilename));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "index";
-    }
-
     @GetMapping("/getBookInfo")
     @ResponseBody
     public Book getBookInfo(int id) {

@@ -12,4 +12,6 @@ public interface OrderDao {
     List<Order> findOrderByUsername(String username);
 
     boolean createOrder(Order order);
+
+    List<Order> findOrderByShopId(int shopId);
 }

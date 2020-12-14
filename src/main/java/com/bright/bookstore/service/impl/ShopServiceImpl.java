@@ -46,4 +46,15 @@ public class ShopServiceImpl implements ShopService {
             shop.setId(-1);
         }
     }
+
+    /**
+     * 通过用户名查找商铺
+     *
+     * @param username 用户名
+     * @return shop
+     */
+    @Override
+    public Shop findShopByUsername(String username) {
+        return shopDao.findShopByUsername(username);
+    }
 }

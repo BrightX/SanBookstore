@@ -30,4 +30,10 @@ public class OrderDaoImpl implements OrderDao {
         // todo 生成订单
         return false;
     }
+
+    @Override
+    public List<Order> findOrderByShopId(int shopId) {
+        String sql = "select * from `order` where shop_id=?";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Order.class), shopId);
+    }
 }

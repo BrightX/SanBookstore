@@ -22,4 +22,9 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> findOrderByUsername(String username) {
         return orderDao.findOrderByUsername(username);
     }
+
+    @Override
+    public List<Order> findOrderByShopId(int shopId) {
+        return orderDao.findOrderByShopId(shopId);
+    }
 }

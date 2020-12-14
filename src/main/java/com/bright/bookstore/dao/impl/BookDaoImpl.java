@@ -34,9 +34,10 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public boolean createBook(Book book) {
-        // todo 添加书籍
-        return false;
+    public int createBook(Book book) {
+        String sql = "insert into book(name, shop_id, shop_name, info, price, image, inventory) value (?,?,?,?,?,?,?)";
+        return jdbcTemplate.update(sql, book.getName(), book.getShopId(), book.getShopName(), book.getInfo(),
+                book.getPrice(), book.getImage(), book.getInventory());
     }
 
     @Override
@@ -54,5 +55,11 @@ public class BookDaoImpl implements BookDao {
         Map<String, List<Integer>> ids = new HashMap<>(1);
         ids.put("ids", bookIds);
         return namedParameterJdbcTemplate.query(sql, ids, new BeanPropertyRowMapper<>(Book.class));
+    }
+
+    @Override
+    public List<Book> findAllBookByShopId(int shopId) {
+        String sql = "select * from book where shop_id=?";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Book.class), shopId);
     }
 }

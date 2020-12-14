@@ -10,7 +10,9 @@ import java.util.List;
  */
 public interface BookDao {
     List<Book> findAllBook();
-    boolean createBook(Book book);
+    int createBook(Book book);
     Book findBookById(int bookId);
     List<Book> findBookByIds(List<Integer> bookIds);
+
+    List<Book> findAllBookByShopId(int shopId);
 }

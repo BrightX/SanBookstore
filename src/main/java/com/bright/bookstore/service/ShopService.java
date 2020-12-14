@@ -15,4 +15,12 @@ public interface ShopService {
      * @param shop 商铺
      */
     void applyShop(AuthUser user, Shop shop);
+
+    /**
+     * 通过用户名查找商铺
+     *
+     * @param username 用户名
+     * @return shop
+     */
+    Shop findShopByUsername(String username);
 }

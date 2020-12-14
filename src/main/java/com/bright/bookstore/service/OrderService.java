@@ -12,4 +12,5 @@ import java.util.List;
  */
 public interface OrderService {
     List<Order> findOrderByUsername(String username);
+    List<Order> findOrderByShopId(int shopId);
 }
