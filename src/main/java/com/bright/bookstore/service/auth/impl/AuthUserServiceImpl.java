@@ -5,6 +5,7 @@ import com.bright.bookstore.pojo.user.AuthUser;
 import com.bright.bookstore.service.auth.AuthUserService;
 import com.bright.bookstore.utils.AuthenticateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,10 +21,17 @@ public class AuthUserServiceImpl implements AuthUserService {
     @Override
     public AuthUser login(String username, String rawPassword) {
         // 用户登录
-        AuthUser authUser = userDao.findUser(username);
-        boolean isAuthenticated = AuthenticateUtils.checkPassword(rawPassword, authUser.getPassword());
-        if (isAuthenticated) {
-            return authUser;
+        try {
+            AuthUser authUser = userDao.findUser(username);
+            if (authUser == null) {
+                return null;
+            }
+            boolean isAuthenticated = AuthenticateUtils.checkPassword(rawPassword, authUser.getPassword());
+            if (isAuthenticated) {
+                return authUser;
+            }
+        } catch (DataAccessException e) {
+            return null;
         }
         return null;
     }

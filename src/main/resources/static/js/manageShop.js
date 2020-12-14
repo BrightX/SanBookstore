@@ -108,11 +108,16 @@ let doAddBook = function (addBookUrl) {
             <img src="" alt="" id="upload-img" class="img-fluid img-thumbnail" style="display: none">
             <script>
                 let uploadImg = $("#upload-img")
+                let uploadLabel = $("#image-upload-label")
                 $("#image-upload").on("change", function () {
+                    uploadImg.hide()
+                    uploadImg[0].src = "";
+                    uploadLabel.text("上传图片");
+                    
                     let file = this.files[0];
                     uploadImg[0].src = URL.createObjectURL(file);
                     uploadImg.show()
-                    $("#image-upload-label").text(file.name);
+                    uploadLabel.text(file.name);
                 })
                 $("#add-book-form").on("reset", function () {
                     uploadImg.hide()
