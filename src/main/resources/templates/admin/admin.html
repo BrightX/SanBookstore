@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../../static/layui-v2.5.6/css/layui.css"
+          th:href="@{/static/layui-v2.5.6/css/layui.css}">
+    <script src="../../static/jQuery-3.4.1/jquery.min.js" th:src="@{/static/jQuery-3.4.1/jquery.min.js}"></script>
+    <script src="../../static/layui-v2.5.6/layui.js" th:src="@{/static/layui-v2.5.6/layui.js}"></script>
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <title>后台管理</title>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-main">
+            <a href="javascript:" class="layui-logo">三味书屋 后台管理</a>
+
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item"><a href="">控制台</a></li>
+                <li class="layui-nav-item"><a href="">商品管理</a></li>
+                <li class="layui-nav-item"><a href="">用户</a></li>
+                <li class="layui-nav-item">
+                    <a href="javascript:">其它系统</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">邮件管理</a></dd>
+                        <dd><a href="">消息管理</a></dd>
+                        <dd><a href="">授权管理</a></dd>
+                    </dl>
+                </li>
+            </ul>
+
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a href="javascript:">
+                        <img src="http://t.cn/RCzsdCq" class="layui-nav-img" alt="">
+                        贤心
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">基本资料</a></dd>
+                        <dd><a href="">安全设置</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="">退了</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree site-demo-nav">
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd class="layui-this">
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="javascript:;" href="javascript:">开发工具<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                        <dd>
+                            <a href="#">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body" style="background-color: #f6f6f6">
+        <div class="layui-fluid">
+
+            <div class="layui-row layui-col-space10">
+
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-body">
+                            <blockquote class="layui-elem-quote" style="margin-bottom: 0">
+                                <p>欢迎
+                                    <span style="color: #00a157;font-size: 18px;">admin</span>登录<span style="font-size: 14px;color: #00acd6">生态绿城管理系统</span>！
+                                    当前时间：<span style="color: #5FB878">2020年11月27日 11:38:52</span>
+                                </p>
+                                <p>上次登录时间:<span style="color: #5FB878">2020年11月27日 11:38:51</span></p>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-col-md9">
+                    <div class="layui-card">
+                        <div class="layui-card-header">你的内容 9/12</div>
+                        <div class="layui-card-body">你的内容 9/12</div>
+                    </div>
+                </div>
+
+                <div class="layui-col-md3">
+                    <div class="layui-card">
+                        <div class="layui-card-header">你的内容 9/12</div>
+                        <div class="layui-card-body">你的内容 9/12</div>
+                    </div>
+                </div>
+
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-body">31241234312</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="layui-footer layui-bg-cyan">
+        <div class="layui-main">
+            <div>&copy; 2020 郑州航空工业管理学院 智能工程学院</div>
+            <div class="layui-layout-right">徐亮亮 1810120118</div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+<script>
+    layui.use('element', function () {
+
+    })
+</script>
+</html>
