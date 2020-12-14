@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <title>管理商铺 - “三味书屋”图书线上销售系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="../../static/favicon.ico" th:href="@{/static/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" href="../../static/bootstrap-4.4.1/css/bootstrap.min.css"
+          th:href="@{/static/bootstrap-4.4.1/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../../static/font-awesome-4.7.0/css/font-awesome.min.css"
+          th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="../../static/css/base.css" th:href="@{/static/css/base.css}">
+    <script src="../../static/jQuery-3.4.1/jquery.min.js" th:src="@{/static/jQuery-3.4.1/jquery.min.js}"></script>
+    <script src="../../static/bootstrap-4.4.1/js/bootstrap.bundle.min.js"
+            th:src="@{/static/bootstrap-4.4.1/js/bootstrap.bundle.min.js}"></script>
+    <script src="../../static/layer-v3.1.1/layer.js" th:src="@{/static/layer-v3.1.1/layer.js}"></script>
+    <script src="../../static/vue-2.6.11/vue.min.js" th:src="@{/static/vue-2.6.11/vue.min.js}"></script>
+
+</head>
+<body class="d-flex flex-column h-100">
+<nav class="navbar navbar-expand-md navbar-light bg-light card-header lead">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a href="#" th:href="@{/}" class="navbar-brand"
+       style="color: #F70000;font-family: fangsong,monospace;font-weight: bold;">三味书屋</a>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <div class="navbar-nav">
+            <a href="javascript:" th:href="@{/}" class="nav-item nav-link">图书商城</a>
+            <a href="javascript:" class="nav-item nav-link">浏览商铺</a>
+            <a href="javascript:" th:href="@{/order}" class="nav-item nav-link">个人订单</a>
+            <a href="javascript:" class="nav-item nav-link text-danger active"><i class="fa fa-shopping-cart" aria-hidden="true"></i> 购物车</a>
+        </div>
+    </div>
+    <div th:if='${session.user}'>
+        欢迎
+        <div class="btn-group">
+            <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" th:text='${session.user.username}'>用户名
+            </button>
+            <div class="dropdown-menu" style="min-width: max-content">
+                <script>
+                    let toApplyShop = function () {}
+                </script>
+                <script th:if="${not session.user.isMerchant}" th:src="@{/static/js/applyShop.js}"></script>
+                <script th:if="${not session.user.isMerchant}" th:inline="javascript">
+                    toApplyShop = function () {
+                        let applyShopUrl = /*[[@{/applyShop}]]*/ ""
+                        doApplyShop(applyShopUrl)
+                    }
+                </script>
+                <a class="dropdown-item" href="javascript:" th:if="${session.user.isMerchant}" th:href="@{/manageShop}">管理商铺</a>
+                <a class="dropdown-item" href="javascript:toApplyShop()" th:if="${not session.user.isMerchant}">申请商铺</a>
+                <a class="dropdown-item" href="javascript:" th:if="${session.user.isSuperuser}">后台管理</a>
+                <a class="dropdown-item" href="javascript:toRePassword()">修改密码</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-danger" href="javascript:"
+                   th:href="@{/logout(next=${#request.requestURI})}">退出登录</a>
+            </div>
+        </div>
+        <a href="javascript:" onclick="toRecharge()" title="去充值" class="navbar-text nav-link">
+            <span>（账户余额：<span style="color: #F70000">￥<span class="balance">0.00</span></span>）</span>
+        </a>
+    </div>
+
+    <div th:if='${session.user} == null'>
+        <a th:href="@{/login}" class="btn btn-primary">登 录</a>
+        <a th:href="@{/register}" class="btn btn-info">注 册</a>
+    </div>
+</nav>
+
+<div id="main" class="container" style="background-color: #f4f4f4; padding: 36px">
+    <div class="row">
+
+    </div>
+
+    <div id="id-hidden" class="h-100 text-center">
+        <div style="padding: 0 1.5rem;">
+            <h1>购物车空空如也</h1>
+            <p class="lead">请去商城添加喜欢的商品吧</p>
+        </div>
+    </div>
+
+    <script>
+        if ($("#main>.row>div").length < 1) {
+            $("#main").addClass("h-100")
+            $("#id-hidden").show()
+        } else {
+            $("#id-hidden").hide()
+        }
+    </script>
+
+</div>
+
+<footer class="text-center lead" style="padding: 20px; background-color: #2F4056; color: #d2d2d2; margin-top: auto;">
+    <p>“三味书屋”图书线上销售系统</p>
+    <div>学号：<span class="text-primary">1810120118</span></div>
+    <p>姓名：<span class="text-success">徐亮亮</span></p>
+    <div>&copy; 郑州航空工业管理学院</div>
+    <div>智能工程学院</div>
+</footer>
+
+<script src="../../static/js/index.js" th:src="@{/static/js/index.js}"></script>
+
+<script th:inline="javascript">
+    let isLogin = /*[[${session.user} != null]]*/ false
+    let userInfoUrl = /*[[@{/getUserInfo}]]*/ "https://www.httpbin.org/anything"
+    let rechargeUrl = /*[[@{/recharge}]]*/ "https://www.httpbin.org/anything"
+
+    getUserInfo(userInfoUrl)
+
+    let toRecharge = function () {
+        doRecharge(userInfoUrl, rechargeUrl)
+    }
+
+</script>
+
+<script th:inline="javascript">
+
+    let rePasswordUrl = /*[[@{/rePassword}]]*/ "https://www.httpbin.org/anything"
+
+    let toRePassword = function () {
+        doRePassword(userInfoUrl, rePasswordUrl)
+    }
+</script>
+
+</body>
+</html>
