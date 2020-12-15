@@ -48,6 +48,7 @@ let toBuy = function (book, shop) {
                 },
                 watch: {
                     purchaseQuantity: function () {
+                        this.purchaseQuantity = parseInt(this.purchaseQuantity) || 1
                         if (this.purchaseQuantity < 1) {
                             this.purchaseQuantity = 1
                         }
