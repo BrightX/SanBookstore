@@ -86,8 +86,8 @@
             <p>价格：<strong class="text-danger">￥ {{book.price.toFixed(2)}}</strong></p>
 
             <div class="btn-group">
-                <button type="button" v-on:click="toBuy(book, shop)" class="btn btn-danger">立即购买</button>
-                <button type="button" v-on:click="" class="btn btn-outline-danger">加入购物车</button>
+                <button type="button" v-on:click="toBuy(book, shop)" class="btn btn-danger" id="to-buy-btn">立即购买</button>
+                <button type="button" v-on:click="" class="btn btn-outline-danger" id="to-cart-btn">加入购物车</button>
             </div>
 
         </div>
@@ -160,6 +160,10 @@
                 document.title = book.name + ' - 书籍详情'
                 book.image = ctx + book.image
                 bookApp.$data.book = book
+                if (book.inventory < 1) {
+                    $('#to-buy-btn').attr('disabled', 'disabled')
+                    $('#to-cart-btn').attr('disabled', 'disabled')
+                }
                 $("#book-app").show()
                 $("#id-hidden").hide()
                 $("#main").removeClass("h-100")

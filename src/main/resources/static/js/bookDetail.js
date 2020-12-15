@@ -1,6 +1,9 @@
 let layTipToBuy
 let buyBookForm
 let toBuy = function (book, shop) {
+    if (book.inventory < 1) {
+        return false
+    }
     layTipToBuy = layer.open({
         type: 1,
         shadeClose: false,
@@ -52,6 +55,9 @@ let toBuy = function (book, shop) {
                         if (this.purchaseQuantity < 1) {
                             this.purchaseQuantity = 1
                         }
+                        if (this.purchaseQuantity > book.inventory) {
+                            this.purchaseQuantity = book.inventory
+                        }
                         this.paymentAmount = this.purchaseQuantity * book.price
                     },
                 },
@@ -60,9 +66,7 @@ let toBuy = function (book, shop) {
                         this.purchaseQuantity++
                     },
                     minus: function () {
-                        if (this.purchaseQuantity > 1) {
-                            this.purchaseQuantity--
-                        }
+                        this.purchaseQuantity--
                     },
                 },
             })
