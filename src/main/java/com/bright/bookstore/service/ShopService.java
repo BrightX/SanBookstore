@@ -2,6 +2,7 @@ package com.bright.bookstore.service;
 
 import com.bright.bookstore.pojo.Shop;
 import com.bright.bookstore.pojo.user.AuthUser;
+import com.bright.bookstore.pojo.vo.ShopVO;
 
 /**
  * todo 商铺 Service
@@ -23,4 +24,12 @@ public interface ShopService {
      * @return shop
      */
     Shop findShopByUsername(String username);
+
+    /**
+     * 查询shopVO 通过 shop id
+     *
+     * @param id shop id
+     * @return ShopVO
+     */
+    ShopVO findShopVoById(int id);
 }

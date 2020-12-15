@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author 徐亮亮
@@ -24,13 +24,7 @@ public class BookController {
 
     @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable int id) {
-        Book book = bookService.findBookById(id);
-        String title = "暂无书籍";
-        if (book != null) {
-            title = book.getName() + " - 商品详情";
-        }
-        model.addAttribute("title", title);
-        model.addAttribute("book", book);
+        model.addAttribute("bookId", id);
         return "book/detail";
     }
 
@@ -38,5 +32,13 @@ public class BookController {
     @ResponseBody
     public Book getBookInfo(int id) {
         return bookService.findBookById(id);
+    }
+
+    @PostMapping("/buyBook")
+    public Map<String, Object> buyBook(HttpSession session, int purchaseQuantity, int bookId, String receiveAddress) {
+        // todo 用户买书
+        Map<String, Object> result = new HashMap<>(4);
+        result.put("next", "order");
+        return result;
     }
 }

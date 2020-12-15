@@ -4,8 +4,10 @@ import com.bright.bookstore.dao.ShopDao;
 import com.bright.bookstore.dao.UserDao;
 import com.bright.bookstore.pojo.Shop;
 import com.bright.bookstore.pojo.user.AuthUser;
+import com.bright.bookstore.pojo.vo.ShopVO;
 import com.bright.bookstore.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -56,5 +58,20 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public Shop findShopByUsername(String username) {
         return shopDao.findShopByUsername(username);
+    }
+
+    /**
+     * 查询shopVO 通过 shop id
+     *
+     * @param id shop id
+     * @return ShopVO
+     */
+    @Override
+    public ShopVO findShopVoById(int id) {
+        try{
+            return shopDao.findShopVoById(id);
+        } catch (EmptyResultDataAccessException e) {
+            return new ShopVO(-1, null, null);
+        }
     }
 }

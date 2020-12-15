@@ -2,6 +2,7 @@ package com.bright.bookstore.dao.impl;
 
 import com.bright.bookstore.dao.ShopDao;
 import com.bright.bookstore.pojo.Shop;
+import com.bright.bookstore.pojo.vo.ShopVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -39,5 +40,11 @@ public class ShopDaoImpl implements ShopDao {
     public Shop findShopByUsername(String username) {
         String sql = "select * from shop where username=?";
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Shop.class), username);
+    }
+
+    @Override
+    public ShopVO findShopVoById(int id) {
+        String sql = "select id, name, send_address from shop where id=?";
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(ShopVO.class), id);
     }
 }

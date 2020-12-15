@@ -2,6 +2,7 @@ package com.bright.bookstore.controller;
 
 import com.bright.bookstore.pojo.Shop;
 import com.bright.bookstore.pojo.user.AuthUser;
+import com.bright.bookstore.pojo.vo.ShopVO;
 import com.bright.bookstore.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,5 +44,11 @@ public class ShopController {
         shopService.applyShop(user, shop);
         session.setAttribute("user", user);
         return shop;
+    }
+
+    @GetMapping("/getShopInfo")
+    @ResponseBody
+    private ShopVO getShopVO(int id) {
+        return shopService.findShopVoById(id);
     }
 }

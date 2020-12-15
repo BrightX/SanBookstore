@@ -1,6 +1,7 @@
 package com.bright.bookstore.dao;
 
 import com.bright.bookstore.pojo.Shop;
+import com.bright.bookstore.pojo.vo.ShopVO;
 
 /**
  * @author 徐亮亮
@@ -22,4 +23,6 @@ public interface ShopDao {
      * @return 商铺
      */
     Shop findShopByUsername(String username);
+
+    ShopVO findShopVoById(int id);
 }
