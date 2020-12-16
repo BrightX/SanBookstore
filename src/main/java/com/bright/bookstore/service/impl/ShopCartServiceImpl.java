@@ -24,8 +24,8 @@ public class ShopCartServiceImpl implements ShopCartService {
     }
 
     @Override
-    public boolean remove(int bookId) {
-        return shopCartDao.remove(bookId);
+    public boolean remove(int shopCartId) {
+        return shopCartDao.remove(shopCartId);
     }
 
     @Override

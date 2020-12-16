@@ -10,6 +10,6 @@ import java.util.List;
  */
 public interface ShopCartService {
     boolean add(ShopCart shopCart);
-    boolean remove(int bookId);
+    boolean remove(int shopCartId);
     List<ShopCart> getShopCartListByUserId(int userId);
 }

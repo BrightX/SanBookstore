@@ -11,6 +11,6 @@ import java.util.List;
 public interface ShopCartDao {
 
     boolean add(ShopCart shopCart);
-    boolean remove(int bookId);
+    boolean remove(int id);
     List<ShopCart> getShopCartListByUserId(int userId);
 }

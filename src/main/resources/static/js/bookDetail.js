@@ -134,3 +134,88 @@ let buyBookSubmit = function (form) {
     }
     return false;
 }
+
+let layerTipShopCartAdd
+let shopCartAddForm
+let toShopCart = function () {
+    layerTipShopCartAdd = layer.open({
+        type: 1,
+        title: false,
+        shadeClose: false,
+        shade: 0.25,
+        area: ['300px', '220px'],
+        content: ` <form action="${shopCartAddUrl}" method="post" onsubmit="shopCartAddSubmit(this); return false;"
+                            id="shop-cart-add-form" style="padding: 10px">
+                        <div class="alert alert-danger text-center h5">加入购物车</div>
+                        
+                        <div class="alert alert-info">
+                            商品数量：
+                            <div class="input-group input-group-sm bg-light" style="width: 150px;display: inline-flex;" title="商品数量">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-outline-danger" v-on:click="minus()" type="button"><i class="fa fa-minus"></i></button>
+                                </div>
+                                <input type="hidden" name="bookId" value="${bookId}">
+                                <input type="number" min="1" name="quantity" class="form-control" v-model="purchaseQuantity" required>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-danger" v-on:click="add()" type="button"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group text-right">
+                            <input type="submit" class="btn btn-sm btn-danger" value="确认加入">
+                            <input type="button" class="btn btn-sm btn-info" onclick="layer.close(layerTipShopCartAdd)" value="取 消">
+                        </div>
+                        
+                    </form>
+                    
+                    <script>
+                        shopCartAddForm = new Vue({
+                            el: '#shop-cart-add-form',
+                            data: {
+                                purchaseQuantity: 1,
+                            },
+                            watch: {
+                                purchaseQuantity: function () {
+                                    this.purchaseQuantity = parseInt(this.purchaseQuantity) || 1
+                                    if (this.purchaseQuantity < 1) {
+                                        this.purchaseQuantity = 1
+                                    }
+                                    if (this.purchaseQuantity > book.inventory) {
+                                        this.purchaseQuantity = book.inventory
+                                    }
+                                },
+                            },
+                            methods: {
+                                add: function () {
+                                    this.purchaseQuantity++
+                                },
+                                minus: function () {
+                                    this.purchaseQuantity--
+                                },
+                            },
+                        })
+                    </script>
+                    `,
+    })
+}
+let shopCartAddSubmit = function (form) {
+    let formData = new FormData(form)
+    $.ajax({
+        url: form.action,
+        type: "POST",
+        data: formData,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (result) {
+            if (result.result) {
+                layer.alert('购物车添加成功', {title: '购物车添加成功', icon: 6})
+                if (layerTipShopCartAdd) {
+                    layer.close(layerTipShopCartAdd)
+                }
+            }
+        }
+    })
+    return false
+}

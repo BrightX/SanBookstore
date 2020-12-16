@@ -7,14 +7,13 @@ import com.bright.bookstore.pojo.vo.ShopCartVO;
 import com.bright.bookstore.service.BookService;
 import com.bright.bookstore.service.ShopCartService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 徐亮亮
@@ -30,21 +29,20 @@ public class ShopCartController {
     @Autowired
     private ShopCartService shopCartService;
 
-    @GetMapping("/add")
-    public ShopCartVO add(HttpSession session, @RequestParam int bookId, @RequestParam int quantity) {
+    @PostMapping("/add")
+    public Map<String, Object> add(HttpSession session, @RequestParam int bookId, @RequestParam int quantity) {
         AuthUser user = (AuthUser) session.getAttribute("user");
+        Map<String, Object> result = new HashMap<>(4);
+        result.put("userId", user.getId());
+        result.put("username", user.getUsername());
 
         ShopCart shopCart = new ShopCart();
         shopCart.setBookId(bookId);
         shopCart.setUserId(user.getId());
         shopCart.setPurchaseQuantity(quantity);
-        shopCartService.add(shopCart);
+        result.put("result", shopCartService.add(shopCart));
 
-        List<ShopCart> shopCartList = shopCartService.getShopCartListByUserId(user.getId());
-        ShopCartVO shopCartVO = new ShopCartVO();
-        shopCartVO.setUserId(user.getId());
-        shopCartVO.setShopCartList(shopCartList);
-        return shopCartVO;
+        return result;
     }
 
     @GetMapping("/remove")

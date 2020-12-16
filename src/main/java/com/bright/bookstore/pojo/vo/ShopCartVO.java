@@ -17,12 +17,6 @@ public class ShopCartVO {
     public ShopCartVO() {
     }
 
-    public ShopCartVO(Integer userId, List<ShopCart> shopCartList, List<Book> bookList) {
-        this.userId = userId;
-        this.shopCartList = shopCartList;
-        this.bookList = bookList;
-    }
-
     @Override
     public String toString() {
         return "ShopCartVO{" +

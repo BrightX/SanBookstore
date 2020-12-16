@@ -28,7 +28,6 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <div class="navbar-nav">
             <a href="javascript:" th:href="@{/}" class="nav-item nav-link active">图书商城</a>
-            <a href="javascript:" class="nav-item nav-link">浏览商铺</a>
             <a href="javascript:" th:href="@{/order}" class="nav-item nav-link">个人订单</a>
             <a href="javascript:" th:href="@{/shopCart}" class="nav-item nav-link text-danger"><i
                     class="fa fa-shopping-cart" aria-hidden="true"></i> 购物车</a>
@@ -87,7 +86,7 @@
 
             <div class="btn-group">
                 <button type="button" v-on:click="toBuy(book, shop)" class="btn btn-danger" id="to-buy-btn">立即购买</button>
-                <button type="button" v-on:click="" class="btn btn-outline-danger" id="to-cart-btn">加入购物车</button>
+                <button type="button" v-on:click="toShopCart()" class="btn btn-outline-danger" id="to-cart-btn">加入购物车</button>
             </div>
 
         </div>
@@ -189,6 +188,7 @@
     let isLogin = /*[[${session.user} != null]]*/ false
     let userInfoUrl = /*[[@{/getUserInfo}]]*/ "https://www.httpbin.org/anything"
     let rechargeUrl = /*[[@{/recharge}]]*/ "https://www.httpbin.org/anything"
+    let shopCartAddUrl = /*[[@{/shopCart/add}]]*/ "https://www.httpbin.org/anything"
 
     getUserInfo(userInfoUrl)
 
