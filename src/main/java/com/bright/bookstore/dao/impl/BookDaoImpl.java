@@ -29,7 +29,7 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public List<Book> findAllBook() {
-        String sql = "select id, name, shop_id, shop_name, info, price, image, create_time, inventory from book";
+        String sql = "select id, name, shop_id, shop_name, info, price, image, create_time, inventory from book where inventory>0";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Book.class));
     }
 

@@ -42,4 +42,16 @@ public class OrderDaoImpl implements OrderDao {
         String sql = "select * from `order` where shop_id=?";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Order.class), shopId);
     }
+
+    @Override
+    public int receive(int orderId) {
+        String sql = "update `order` set status='已收货' where id=?";
+        return jdbcTemplate.update(sql, orderId);
+    }
+
+    @Override
+    public int delivery(int orderId) {
+        String sql = "update `order` set status='已发货' where id=?";
+        return jdbcTemplate.update(sql, orderId);
+    }
 }

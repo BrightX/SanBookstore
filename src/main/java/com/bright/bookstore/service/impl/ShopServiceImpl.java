@@ -1,5 +1,6 @@
 package com.bright.bookstore.service.impl;
 
+import com.bright.bookstore.dao.OrderDao;
 import com.bright.bookstore.dao.ShopDao;
 import com.bright.bookstore.dao.UserDao;
 import com.bright.bookstore.pojo.Shop;
@@ -16,6 +17,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ShopServiceImpl implements ShopService {
+
+    @Autowired
+    private OrderDao orderDao;
 
     @Autowired
     private ShopDao shopDao;
@@ -88,5 +92,10 @@ public class ShopServiceImpl implements ShopService {
             return 1;
         }
         return 0;
+    }
+
+    @Override
+    public int delivery(int orderId) {
+        return orderDao.delivery(orderId);
     }
 }

@@ -15,4 +15,6 @@ public interface OrderService {
     List<Order> findOrderByUsername(String username);
     List<Order> findOrderByShopId(int shopId);
     int createOrder(Order order, AuthUser user);
+
+    int receive(int orderId);
 }

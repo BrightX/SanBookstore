@@ -57,4 +57,9 @@ public class OrderServiceImpl implements OrderService {
         }
         return 0;
     }
+
+    @Override
+    public int receive(int orderId) {
+        return orderDao.receive(orderId);
+    }
 }

@@ -34,7 +34,7 @@
             <a href="javascript:" th:href="@{/}" class="nav-item nav-link">图书商城</a>
             <a href="javascript:" class="nav-item nav-link">浏览商铺</a>
             <a href="javascript:" th:href="@{/order}" class="nav-item nav-link">个人订单</a>
-            <a href="javascript:" class="nav-item nav-link text-danger active"><i class="fa fa-shopping-cart"
+            <a href="javascript:" th:href="@{/shopCart}" class="nav-item nav-link text-danger active"><i class="fa fa-shopping-cart"
                                                                                   aria-hidden="true"></i> 购物车</a>
         </div>
     </div>
@@ -81,7 +81,7 @@
         <div class="col-md-12 text-center">
             <h2 v-text="shop.name"></h2>
             <p class="blockquote-footer" v-text="shop.sendAddress"></p>
-            <p class="blockquote-footer">
+            <p>
                 营业额：<strong class="text-danger">￥{{shop.balance.toFixed(2)}}</strong>
                 <button class="btn badge badge-success" v-on:click="cashingBalance()">提现</button>
             </p>
@@ -149,7 +149,7 @@
                         <td>{{order.sendAddress}}</td>
                         <td>{{order.receiveAddress}}</td>
                         <td>{{order.createTime | formatDatetime}}</td>
-                        <td><button class="btn btn-sm btn-danger">{{order.status}}</button></td>
+                        <td><button class="btn btn-sm btn-danger" v-on:click="toOrderDetailManage(order)">{{order.status}}</button></td>
                     </tr>
                 </table>
             </div>
@@ -179,6 +179,7 @@
         let getShopUrl = /*[[@{/manageShop/getShop}]]*/ ""
         let getOrdersUrl = /*[[@{/manageShop/getOrders}]]*/ ""
         let getBooksUrl = /*[[@{/manageShop/getBooks}]]*/ ""
+        let deliveryUrl = /*[[@{/manageShop/delivery}]]*/ ""
     </script>
 
     <script src="../../static/js/manageShop.js" th:src="@{/static/js/manageShop.js}"></script>

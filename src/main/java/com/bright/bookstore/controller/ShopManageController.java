@@ -146,4 +146,17 @@ public class ShopManageController {
         }
         return result;
     }
+
+    /**
+     * todo 确认发货
+     *
+     * @param orderId 订单id
+     */
+    @PostMapping("/delivery")
+    public Map<String, Object> delivery(int orderId) {
+        Map<String, Object> result = new HashMap<>(4);
+        result.put("orderId", orderId);
+        result.put("status", shopService.delivery(orderId));
+        return result;
+    }
 }

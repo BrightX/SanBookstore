@@ -14,4 +14,8 @@ public interface OrderDao {
     int createOrder(Order order);
 
     List<Order> findOrderByShopId(int shopId);
+
+    int receive(int orderId);
+
+    int delivery(int orderId);
 }
