@@ -11,7 +11,7 @@ import java.util.List;
 public interface OrderDao {
     List<Order> findOrderByUsername(String username);
 
-    boolean createOrder(Order order);
+    int createOrder(Order order);
 
     List<Order> findOrderByShopId(int shopId);
 }

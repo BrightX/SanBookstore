@@ -115,4 +115,35 @@ public class ShopManageController {
         result.put("msg", "OK");
         return result;
     }
+
+    @PostMapping("/cashingBalance")
+    public Map<String, Object> cashingBalance(HttpSession session, double amount) {
+        // 商铺提现
+        AuthUser user = (AuthUser) session.getAttribute("user");
+        Map<String, Object> result = new HashMap<>(4);
+        result.put("userId", user.getId());
+        result.put("username", user.getUsername());
+
+        Shop shop = shopService.findShopByUsername(user.getUsername());
+        if (shop == null) {
+            result.put("status", -1);
+            result.put("msg", "无效商铺");
+            return result;
+        }
+
+        if (amount > shop.getBalance()) {
+            result.put("status", -2);
+            result.put("msg", "非法提现数额");
+            return result;
+        }
+        int cashing = shopService.cashingBalance(user, shop, amount);
+        if (cashing > 0) {
+            result.put("status", 200);
+            result.put("msg", "提现成功");
+        } else {
+            result.put("status", -3);
+            result.put("msg", "提现失败");
+        }
+        return result;
+    }
 }

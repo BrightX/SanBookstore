@@ -26,9 +26,15 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public boolean createOrder(Order order) {
-        // todo 生成订单
-        return false;
+    public int createOrder(Order order) {
+        // 生成订单
+        String sql = "insert into `order`(order_number, username, user_id, shop_name, shop_id, book_name, book_id, " +
+                "price, image, send_address, receive_address, status, payment_amount, purchase_quantity) " +
+                "VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+        return jdbcTemplate.update(sql, order.getOrderNumber(), order.getUsername(), order.getUserId(), order.getShopName(),
+                order.getShopId(), order.getBookName(), order.getBookId(), order.getPrice(), order.getImage(),
+                order.getSendAddress(), order.getReceiveAddress(), order.getStatus(), order.getPaymentAmount(), order.getPurchaseQuantity());
     }
 
     @Override

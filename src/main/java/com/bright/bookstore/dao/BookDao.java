@@ -11,6 +11,7 @@ import java.util.List;
 public interface BookDao {
     List<Book> findAllBook();
     int createBook(Book book);
+    int minus(int bookId, int purchaseQuantity);
     Book findBookById(int bookId);
     List<Book> findBookByIds(List<Integer> bookIds);
 

@@ -47,4 +47,16 @@ public class ShopDaoImpl implements ShopDao {
         String sql = "select id, name, send_address from shop where id=?";
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(ShopVO.class), id);
     }
+
+    @Override
+    public int getPay(int shopId, double paymentAmount) {
+        String sql = "update shop set balance=balance+? where id=?";
+        return jdbcTemplate.update(sql, paymentAmount, shopId);
+    }
+
+    @Override
+    public int cashingBalance(int shopId, double amount) {
+        String sql = "update shop set balance=balance-? where id=?";
+        return jdbcTemplate.update(sql, amount, shopId);
+    }
 }

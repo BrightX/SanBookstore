@@ -117,7 +117,8 @@ public class UserDaoImpl implements UserDao {
      * @return 是否支付成功
      */
     @Override
-    public boolean pay(String username, double amount) {
-        return false;
+    public int pay(String username, double amount) {
+        String sql = "update user set balance=balance-? where username=?";
+        return jdbcTemplate.update(sql, amount, username);
     }
 }

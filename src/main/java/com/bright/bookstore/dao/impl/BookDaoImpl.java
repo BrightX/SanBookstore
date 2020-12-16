@@ -41,6 +41,12 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
+    public int minus(int bookId, int purchaseQuantity) {
+        String sql = "update book set inventory=inventory-? where id=?";
+        return jdbcTemplate.update(sql, purchaseQuantity, bookId);
+    }
+
+    @Override
     public Book findBookById(int bookId) throws EmptyResultDataAccessException {
         String sql = "select id, name, shop_id, shop_name, info, price, image, create_time, inventory from book where id=?";
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Book.class), bookId);

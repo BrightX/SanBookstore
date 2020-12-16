@@ -32,4 +32,6 @@ public interface ShopService {
      * @return ShopVO
      */
     ShopVO findShopVoById(int id);
+
+    int cashingBalance(AuthUser user, Shop shop, double amount);
 }

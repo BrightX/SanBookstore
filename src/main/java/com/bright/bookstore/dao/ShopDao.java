@@ -25,4 +25,8 @@ public interface ShopDao {
     Shop findShopByUsername(String username);
 
     ShopVO findShopVoById(int id);
+
+    int getPay(int shopId, double paymentAmount);
+
+    int cashingBalance(int shopId, double amount);
 }

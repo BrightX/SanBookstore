@@ -9,8 +9,8 @@ let toBuy = function (book, shop) {
         shadeClose: false,
         title: false,
         shade: 0.25,
-        area: ['800px', '600px'],
-        content: `<form action="${buyBookUrl}" method="post" onsubmit="return false;"
+        area: ['800px', '500px'],
+        content: `<form action="${buyBookUrl}" method="post" onsubmit="buyBookSubmit(this); return false;"
                 id="buy-book-form" style="padding: 10px">
             <div class="alert alert-danger text-center h5">确认订单</div>
             
@@ -38,8 +38,31 @@ let toBuy = function (book, shop) {
                     </div> 
                 </div>
             </div>
-            <!-- todo 用户买书 表单 -->
+            
             <input type="hidden" name="purchaseQuantity" v-bind:value="purchaseQuantity">
+            <input type="hidden" name="bookId" value="${book.id}">
+            
+            <div class="alert alert-info">
+                商铺：<strong>${shop.name}</strong><br>
+                发货地址：<strong>${shop.sendAddress}</strong>
+            </div>
+            
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <label for="id-receiveAddress" class="input-group-text">
+                            <i class="fa fa-envelope-o fa-lg"></i>
+                        </label>
+                    </div>
+                    <textarea required class="form-control" id="id-receiveAddress" placeholder="请输入收货地址"
+                     title="请输入收货地址" name="receiveAddress"></textarea>
+                </div>
+            </div>
+            
+            <div class="form-group text-right">
+                <input type="submit" id="buy-submit-btn" class="btn btn-danger" value="提交订单">
+            </div>
+            
         </form>
         
         <script>
@@ -59,6 +82,7 @@ let toBuy = function (book, shop) {
                             this.purchaseQuantity = book.inventory
                         }
                         this.paymentAmount = this.purchaseQuantity * book.price
+                        $('#buy-submit-btn').removeAttr('disabled')
                     },
                 },
                 methods: {
@@ -74,4 +98,39 @@ let toBuy = function (book, shop) {
         `,
 
     })
+}
+
+let buyBookSubmit = function (form) {
+    $('#buy-submit-btn').attr('disabled', 'disabled')
+    let formData = new FormData(form)
+    let paymentAmount = formData.get('purchaseQuantity') * book.price
+    if (paymentAmount > user.balance) {
+        layer.msg('当前账户余额不足')
+        return false
+    } else {
+        $.ajax({
+            url: form.action,
+            type: "POST",
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            before: function (){
+                layer.msg("正在购买商品，请稍等。。。")
+            },
+            success: function (result) {
+                if (result.status > 0) {
+                    layer.msg(result.msg)
+                    layer.close(layTipToBuy)
+                    location.href = ctx + result.next
+                } else {
+                    layer.msg(result.msg)
+                }
+            },
+            complete: function () {
+                $('#buy-submit-btn').removeAttr('disabled')
+            },
+        })
+    }
+    return false;
 }

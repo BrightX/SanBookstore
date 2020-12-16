@@ -57,7 +57,12 @@ public class ShopServiceImpl implements ShopService {
      */
     @Override
     public Shop findShopByUsername(String username) {
-        return shopDao.findShopByUsername(username);
+        Shop shop = null;
+        try {
+            shop = shopDao.findShopByUsername(username);
+        } catch (EmptyResultDataAccessException ignore) {
+        }
+        return shop;
     }
 
     /**
@@ -68,10 +73,20 @@ public class ShopServiceImpl implements ShopService {
      */
     @Override
     public ShopVO findShopVoById(int id) {
-        try{
+        try {
             return shopDao.findShopVoById(id);
         } catch (EmptyResultDataAccessException e) {
             return new ShopVO(-1, null, null);
         }
+    }
+
+    @Override
+    public int cashingBalance(AuthUser user, Shop shop, double amount) {
+        userDao.recharge(user.getUsername(), amount);
+        int result1 = shopDao.cashingBalance(shop.getId(), amount);
+        if (result1 > 0) {
+            return 1;
+        }
+        return 0;
     }
 }

@@ -74,5 +74,5 @@ public interface UserDao {
      * @param amount 充值金额
      * @return 是否充值成功
      */
-    boolean pay(String username, double amount);
+    int pay(String username, double amount);
 }
