@@ -81,7 +81,10 @@
         <div class="col-md-12 text-center">
             <h2 v-text="shop.name"></h2>
             <p class="blockquote-footer" v-text="shop.sendAddress"></p>
-            <p class="blockquote-footer">营业额：<strong class="text-danger">￥{{shop.balance.toFixed(2)}}</strong></p>
+            <p class="blockquote-footer">
+                营业额：<strong class="text-danger">￥{{shop.balance.toFixed(2)}}</strong>
+                <button class="btn badge badge-success" v-on:click="cashingBalance()">提现</button>
+            </p>
         </div>
 
         <ul class="nav nav-tabs col-md-12" id="myTab" role="tablist">
@@ -154,6 +157,7 @@
     </div>
 
     <script th:inline="javascript">
+        let cashingBalanceUrl = /*[[@{/manageShop/cashingBalance}]]*/ ""
         let shopApp = new Vue({
             el: '#shop-app',
             data: {

@@ -148,3 +148,67 @@ let doAddBook = function (addBookUrl) {
 `,
     })
 }
+
+let layTipCashingBalance
+let cashingBalance = function () {
+    layTipCashingBalance = layer.open({
+        type: 1,
+        title: `<i class="fa fa-dollar" style="font-size: 1.5rem;color: gold;"></i>  商铺提现`,
+        shadeClose: false,
+        shade: 0.25,
+        area: ['320px', '320px'],
+        content: `<form action="${cashingBalanceUrl}" method="post" onsubmit="cashingBalanceSubmit(this); return false;"
+              id="cashing-balance-form" style="padding: 10px">
+            <div class="alert alert-info">账户余额：<span style="color: #F70000">￥ <span class="balance">${user.balance.toFixed(2)}</span></span></div>
+            <div class="alert alert-info">可提现金额：<span style="color: #F70000">￥ <span class="balance">${shopApp.$data.shop.balance.toFixed(2)}</span></span></div>
+            <div class="form-group">
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="id-amount"><i class="fa fa-lg fa-dollar"></i></label>
+                    </div>
+                    <input type="hidden" name="next" value="${location.href}">
+                    <input type="number" class="form-control" min="0.5" max="${shopApp.$data.shop.balance}" size="7" step="0.5" required
+                           name="amount" id="id-amount" autocomplete="off"
+                           placeholder="请输入提现金额">
+                </div>
+            </div>
+            <div class="form-group text-center">
+                <input type="submit" class="btn btn-primary" value="提 现">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="reset" class="btn btn-outline-secondary" value="重 置">
+            </div>
+        </form>`,
+    })
+}
+let cashingBalanceSubmit = function (form){
+    let formData = new FormData(form)
+    $.ajax({
+        url: form.action,
+        type: "POST",
+        data: {
+            next: formData.get("next"),
+            amount: formData.get("amount"),
+        },
+        beforeSend: function () {
+            layer.msg("正在提现，请稍等。。。")
+        },
+        success: function (result) {
+            if (result.status > 0) {
+                layer.msg(`提现成功`)
+                getData()
+                getUserInfo(userInfoUrl)
+            } else {
+                layer.msg(result.msg)
+            }
+        },
+        error: function () {
+            layer.msg("400 提现失败")
+        },
+        complete: function () {
+            if (layTipCashingBalance) {
+                layer.close(layTipCashingBalance)
+            }
+        },
+    })
+    return false;
+}
