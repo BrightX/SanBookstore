@@ -286,3 +286,90 @@ let toDelivery = function (orderId, status) {
         });
     }
 }
+
+let layerTipAddInventory
+let addInventoryForm
+let toAddInventory = function (bookId, inventory) {
+    layerTipAddInventory = layer.open({
+        type: 1,
+        title: false,
+        shadeClose: false,
+        shade: 0.25,
+        area: ['329px', '210px'],
+        content: `
+            <form action="${addInventoryUrl}" method="post" onsubmit="addInventorySubmit(this); return false;"
+                            id="add-inventory-form" style="padding: 10px">
+                        <div class="alert alert-danger text-center h5">修改库存</div>
+                        
+                        <div class="alert alert-info">
+                            修改商品数量：
+                            <div class="input-group input-group-sm bg-light" style="width: 150px;display: inline-flex;" title="商品数量">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-outline-danger" v-on:click="minus()" type="button"><i class="fa fa-minus"></i></button>
+                                </div>
+                                <input type="hidden" name="bookId" value="${bookId}">
+                                <input type="number" min="0" name="inventory" class="form-control" v-model="inventory" required>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-danger" v-on:click="add()" type="button"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group text-right">
+                            <input type="submit" class="btn btn-sm btn-danger" value="提 交">
+                            <input type="button" class="btn btn-sm btn-info" onclick="layer.close(layerTipAddInventory)" value="取 消">
+                        </div>
+                        
+                    </form>
+                    
+                    <script>
+                        addInventoryForm = new Vue({
+                            el: '#add-inventory-form',
+                            data: {
+                                inventory: ${inventory},
+                            },
+                            watch: {
+                                inventory: function () {
+                                    this.inventory = parseInt(this.inventory) || 0
+                                    if (this.inventory < 0) {
+                                        this.inventory = 0
+                                    }
+                                    if (this.inventory > 999999) {
+                                        this.inventory = 999999
+                                    }
+                                },
+                            },
+                            methods: {
+                                add: function () {
+                                    this.inventory++
+                                },
+                                minus: function () {
+                                    this.inventory--
+                                },
+                            },
+                        })
+                    </script>
+                    `,
+    })
+}
+let addInventorySubmit = function (form) {
+    let formData = new FormData(form)
+    $.ajax({
+        url: form.action,
+        type: "POST",
+        data: formData,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (result) {
+            if (result.result) {
+                layer.alert('库存修改成功', {title: '库存修改成功', icon: 6})
+                getData()
+                if (layerTipAddInventory) {
+                    layer.close(layerTipAddInventory)
+                }
+            }
+        }
+    })
+    return false;
+}

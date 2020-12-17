@@ -57,4 +57,9 @@ public class BookServiceImpl implements BookService {
     public List<Book> findBookByIds(List<Integer> bookIds) {
         return bookDao.findBookByIds(bookIds);
     }
+
+    @Override
+    public int addInventory(int bookId, int inventory) {
+        return bookDao.addInventory(bookId, inventory);
+    }
 }

@@ -46,7 +46,8 @@
                 <script th:if="${not session.user.isMerchant}" th:inline="javascript">
                     toApplyShop = function () {
                         let applyShopUrl = /*[[@{/applyShop}]]*/ ""
-                        doApplyShop(applyShopUrl)
+                        let manageShopUrl = /*[[@{/manageShop}]]*/ ""
+                        doApplyShop(applyShopUrl, manageShopUrl)
                     }
                 </script>
                 <a class="dropdown-item" href="javascript:" th:if="${session.user.isMerchant}" th:href="@{/manageShop}">管理商铺</a>
@@ -86,7 +87,7 @@
                 </tr>
                 <tr v-for="order in orderList">
                     <td>{{ order.bookName }}</td>
-                    <td><button class="btn btn-sm btn-info" v-on:click="toOrderDetail(order)">{{ order.status }}</button></td>
+                    <td><button v-bind:class="order.status | statusClass" v-on:click="toOrderDetail(order)">{{ order.status }}</button></td>
                     <td>{{ order.price.toFixed(2) }}</td>
                     <td>{{ order.shopName }}</td>
                     <td>{{ order.purchaseQuantity }}</td>
@@ -113,7 +114,17 @@
                 formatDatetime(datetime) {
                     let date = new Date(datetime)
                     return date.toLocaleString('zh-CN', {timeZone:'Asia/Shanghai', hour12:false})
-                }
+                },
+                statusClass(stat) {
+                    let base = 'btn btn-sm btn-'
+                    if (stat === '已发货') {
+                        return base + 'info'
+                    }
+                    if (stat === '已收货') {
+                        return base + 'success'
+                    }
+                    return base + 'warning'
+                },
             },
         })
 

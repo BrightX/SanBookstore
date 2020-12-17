@@ -17,7 +17,7 @@
 * Java 1.8.261
 * Spring Boot 2.3.6
 * Maven 3.6.3
-* Tomcat 9.3.39
+* Tomcat 9.0.39
 
 前端：
 * Bootstrap 4.4.1

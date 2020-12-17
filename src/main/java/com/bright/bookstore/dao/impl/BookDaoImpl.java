@@ -68,4 +68,10 @@ public class BookDaoImpl implements BookDao {
         String sql = "select * from book where shop_id=?";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Book.class), shopId);
     }
+
+    @Override
+    public int addInventory(int bookId, int inventory) {
+        String sql = "update book set inventory=? where id=?";
+        return jdbcTemplate.update(sql, inventory, bookId);
+    }
 }

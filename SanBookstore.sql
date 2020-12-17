@@ -69,7 +69,7 @@ CREATE TABLE SanBookstore.order (
 ) COMMENT '订单表';
 
 -- 购物车表
-CREATE TABLE SanBookstore.ShopCart (
+CREATE TABLE SanBookstore.shopcart (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT 'id',
     book_id INT UNSIGNED COMMENT '商品id',
     user_id INT UNSIGNED COMMENT '用户id',

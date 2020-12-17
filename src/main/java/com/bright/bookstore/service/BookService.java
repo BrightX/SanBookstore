@@ -21,4 +21,6 @@ public interface BookService {
     void addBook(AuthUser user, Book book);
 
     List<Book> findBookByIds(List<Integer> bookIds);
+
+    int addInventory(int bookId, int inventory);
 }

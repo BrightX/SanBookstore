@@ -1,6 +1,7 @@
 let applyShopLayer
-
-let doApplyShop = function (applyShopUrl) {
+let manageShopUrl
+let doApplyShop = function (applyShopUrl, shopUrl) {
+    manageShopUrl = shopUrl
     applyShopLayer = layer.open({
         type: 1,
         shadeClose: false,
@@ -61,7 +62,7 @@ let applyShopSubmit = function (form) {
             if (result.id > 0) {
                 layer.msg("商铺申请成功")
                 layer.close(applyShopLayer)
-                location.reload()
+                location.href = manageShopUrl
             } else {
                 layer.msg("商铺申请失败")
             }

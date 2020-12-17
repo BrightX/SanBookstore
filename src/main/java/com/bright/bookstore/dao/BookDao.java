@@ -16,4 +16,6 @@ public interface BookDao {
     List<Book> findBookByIds(List<Integer> bookIds);
 
     List<Book> findAllBookByShopId(int shopId);
+
+    int addInventory(int bookId, int inventory);
 }

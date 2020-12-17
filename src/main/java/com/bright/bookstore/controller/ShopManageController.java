@@ -116,6 +116,9 @@ public class ShopManageController {
         return result;
     }
 
+    /**
+     * 提现
+     */
     @PostMapping("/cashingBalance")
     public Map<String, Object> cashingBalance(HttpSession session, double amount) {
         // 商铺提现
@@ -148,7 +151,7 @@ public class ShopManageController {
     }
 
     /**
-     * todo 确认发货
+     * 确认发货
      *
      * @param orderId 订单id
      */
@@ -157,6 +160,17 @@ public class ShopManageController {
         Map<String, Object> result = new HashMap<>(4);
         result.put("orderId", orderId);
         result.put("status", shopService.delivery(orderId));
+        return result;
+    }
+
+    /**
+     * 修改库存
+     */
+    @PostMapping("/addInventory")
+    public Map<String, Object> addInventory(int bookId, int inventory) {
+        Map<String, Object> result = new HashMap<>(4);
+        result.put("status", 200);
+        result.put("result", bookService.addInventory(bookId, inventory));
         return result;
     }
 }
