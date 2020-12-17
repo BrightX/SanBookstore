@@ -5,7 +5,7 @@ import com.bright.bookstore.pojo.user.AuthUser;
 import com.bright.bookstore.pojo.vo.ShopVO;
 
 /**
- * todo 商铺 Service
+ * 商铺 Service
  * @author 徐亮亮
  * @since 2020/12/1
  */

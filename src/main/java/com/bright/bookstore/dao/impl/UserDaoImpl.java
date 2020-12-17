@@ -88,7 +88,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     /**
-     * todo 用户余额充值
+     * 用户余额充值
      *
      * @param username 用户名
      * @param amount   充值金额
@@ -110,7 +110,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     /**
-     * todo 用户支付
+     * 用户支付
      *
      * @param username 用户名
      * @param amount   充值金额

@@ -6,7 +6,7 @@ import com.bright.bookstore.pojo.user.AuthUser;
 import java.util.List;
 
 /**
- * todo 书 service
+ * 书 service
  *
  * @author 徐亮亮
  * @since 2020/12/1

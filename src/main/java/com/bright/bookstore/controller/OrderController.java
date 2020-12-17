@@ -31,9 +31,6 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @Autowired
-    private BookService bookService;
-
     @GetMapping
     public String detail() {
         return "order/detail";
@@ -52,14 +49,6 @@ public class OrderController {
         orderVO.setOrderList(orderList);
         orderVO.setTotal(orderList.size());
         return orderVO;
-    }
-
-    @GetMapping("/create")
-    public String create(Model model, int bookId) {
-        Book book = bookService.findBookById(bookId);
-        model.addAttribute("book", book);
-        // todo
-        return "";
     }
 
     /**
