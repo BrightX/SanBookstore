@@ -71,8 +71,26 @@
 </nav>
 
 <div id="main" class="container" style="background-color: #f4f4f4; padding: 36px">
-    <div class="row">
-
+    <div class="row" id="shop-cart-app">
+        <div v-for="book in bookList" class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card mb-3 shadow-sm">
+                <img v-bind:src="book.image || defaultImg" alt="" class="img-fluid img-thumbnail">
+                <div class="card-body">
+                    <div class="card-text">{{book.name}}</div>
+                    <div class="small text-muted">上架时间：{{book.createTime | formatDatetime}}</div>
+                    <div class="small text-muted">剩余：<strong class="text-danger">{{book.inventory}}</strong>
+                        本
+                    </div>
+                    <p>价格：<strong class="text-danger">￥ {{book.price.toFixed(2)}}</strong></p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a href="javascript:" v-bind:href="book.id | detailUrl" class="btn btn-sm btn-danger">查看详情</a>
+                        </div>
+                        <small class="text-muted blockquote-footer">{{book.shopName}}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="id-hidden" class="h-100 text-center">
@@ -82,13 +100,47 @@
         </div>
     </div>
 
-    <script>
-        if ($("#main>.row>div").length < 1) {
-            $("#main").addClass("h-100")
-            $("#id-hidden").show()
-        } else {
-            $("#id-hidden").hide()
-        }
+    <script th:inline="javascript">
+        $("#main").addClass("h-100")
+        $("#id-hidden").show()
+        $("#shop-cart-app").hide()
+        let defaultImg = /*[[@{/static/img/小瞬间.jpg}]]*/ '../../static/img/小瞬间.jpg'
+        let getShopCartUrl = /*[[@{/shopCart/get}]]*/ ''
+        let shopCartData = {}
+
+        let shopCartApp = new Vue({
+            el: '#shop-cart-app',
+            data: {
+                bookList: [],
+                shopCartList: [],
+            },
+            filters: {
+                formatDatetime(datetime) {
+                    let date = new Date(datetime)
+                    return date.toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai', hour12: false})
+                },
+                detailUrl(bookId) {
+                    let detailCtx = /*[[@{/book/detail/}]]*/ ''
+                    return detailCtx + bookId
+                },
+        },
+        })
+
+        $.ajax({
+            url: getShopCartUrl,
+            type: 'GET',
+            success: function (result) {
+                shopCartData = result
+                shopCartApp.$data.bookList = shopCartData.bookList
+                shopCartApp.$data.shopCartList = shopCartData.shopCartList
+                if (shopCartData.bookList.length > 0) {
+                    $("#shop-cart-app").show()
+                    $("#id-hidden").hide()
+                    $("#main").removeClass("h-100")
+                }
+            }
+        })
+
     </script>
 
 </div>
